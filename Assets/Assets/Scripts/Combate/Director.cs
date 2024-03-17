@@ -7,7 +7,7 @@ public enum estadoBatalla { INICIO, JUGADORTURNO, ENEMIGOTURNO, GANAR, PERDER}
 public class Director : MonoBehaviour
 {
     // Start is called before the first frame update
-
+    public static Director Instance;
     [SerializeField] GameObject grupo;
     [SerializeField] GameObject enemigos;
     [SerializeField] estadoBatalla batalla;
@@ -18,6 +18,14 @@ public class Director : MonoBehaviour
     [SerializeField] int turno = 0;
     private float distancia;
 
+    void Awake()
+    {
+        if(Instance == null)
+        {
+            Instance = this;
+        }
+    }
+    
     void Start()
     {
         batalla = estadoBatalla.INICIO;
@@ -116,10 +124,11 @@ public class Director : MonoBehaviour
         cambiarTexto("Turno Del Jugador");
     }
 
-    public void jugadorAtaque(int enemigo)
+    public void jugadorAtaque(int dao)
     {
-        grupoEnemigos[enemigo].GetComponent<Personaje>().modificarVida(-22);
-        cambiarTexto("El enemigo ha recibido "+22+" de daño");
+        Debug.Log(dao)
+        grupoEnemigos[0].GetComponent<Personaje>().modificarVida(-dao);
+        cambiarTexto("El enemigo ha recibido "+dao+" de daño");
         Turno();
     }
 
