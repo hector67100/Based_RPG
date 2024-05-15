@@ -1,6 +1,7 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
-using System;
+using System.IO;
 using UnityEngine;
 
 public enum estadoBatalla { INICIO, JUGADORTURNO, ENEMIGOTURNO, GANAR, PERDER}
@@ -13,10 +14,15 @@ public class Director : MonoBehaviour
     [SerializeField] estadoBatalla batalla;
     [SerializeField] CombatesScriptObject combate;
     [SerializeField] int inicioEnemigos;
-    [SerializeField] Transform[] grupoJugadores;
-    [SerializeField] Transform[] grupoEnemigos;
+    [SerializeField] public Transform[] grupoJugadores;
+    [SerializeField] public Transform[] grupoEnemigos;
+    [SerializeField] Transform Jugador;
     [SerializeField] int turno = 0;
+    [SerializeField] int enemigoSeleccionado = 0;
+    [SerializeField] Acciones accionEnCola = null;
+    [SerializeField] Animator anim;
     private float distancia;
+    public bool seleccionable = false;
 
     void Awake()
     {
@@ -39,29 +45,39 @@ public class Director : MonoBehaviour
             case  estadoBatalla.JUGADORTURNO:
                 if(turno<grupoJugadores.Length)
                 {
+                    UICombate.Instance.setUiJugadorTurno(true);
+                    Jugador = grupoJugadores[turno];
                     JugadorTurno();
-                    Debug.Log(turno);
                     turno++;
                 }else
                 {
                     batalla = estadoBatalla.ENEMIGOTURNO;
                     StartCoroutine(InciarTurnoEnemigo());
-                    turno = 1;
+                    UICombate.Instance.setUiJugadorTurno();
+                    turno = 0;
                 }
             break;
 
             case  estadoBatalla.ENEMIGOTURNO:
                 if(turno<grupoEnemigos.Length)
                 {
-                    turno++;
                     StartCoroutine(InciarTurnoEnemigo());
                 }else
                 {
                     batalla = estadoBatalla.JUGADORTURNO;
                     turno = 0;
+                    StartCoroutine(ReiniciarTurno());
                 }
             break;
+
+            case  estadoBatalla.GANAR:
+                Debug.Log("ganaste");
+            break;
+            case  estadoBatalla.PERDER:
+                Debug.Log("perdiste");
+            break;
         }
+        
     }
 
     void llenarContenedoresDeCombatientes()
@@ -103,19 +119,25 @@ public class Director : MonoBehaviour
             inicioEnemigos = -8;
             break;
         }
-        
+        int conteoEnemigo = 0;
         foreach(GameObject enemigo in  combate.prefabs)
         {
             GameObject enemy = Instantiate(enemigo, new Vector3(inicioEnemigos,0,0), Quaternion.identity, enemigos.transform);
+            enemy.name = enemy.name + conteoEnemigo.ToString();
+            enemy.GetComponent<Personaje>().index = conteoEnemigo;
             sprites = enemy.GetComponentInChildren<SpriteRenderer>().sprite;
             enemy.transform.position = new Vector3(enemy.transform.position.x+(espacioSprite),enemy.transform.position.y,enemy.transform.position.z);
-            espacioSprite +=  enemy.GetComponentInChildren<SpriteRenderer>().bounds.size.x +1;   
+            espacioSprite +=  enemy.GetComponentInChildren<SpriteRenderer>().bounds.size.x +1;
+            conteoEnemigo++;   
         }
 
         yield return new WaitForSeconds(2f);
 
         batalla = estadoBatalla.JUGADORTURNO;
         llenarContenedoresDeCombatientes();
+        Personaje datojugador = grupoJugadores[0].GetComponent<Personaje>();
+        UIManager.Instance.setSlidersMaxValues(datojugador.vidamaxima,datojugador.energiamaxima);
+        UIManager.Instance.setSlidersValues(datojugador.vida,datojugador.energia);
         Turno();
     }
 
@@ -126,10 +148,9 @@ public class Director : MonoBehaviour
 
     public void jugadorAtaque(int dao)
     {
-        Debug.Log(dao)
-        grupoEnemigos[0].GetComponent<Personaje>().modificarVida(-dao);
-        cambiarTexto("El enemigo ha recibido "+dao+" de daño");
-        Turno();
+        setaccionEnCola(Jugador.GetComponentInChildren<Arma>().basico);
+        UICombate.Instance.setUiJugadorTurno();
+        cambiarTexto("Seleccione Enemigo");
     }
 
     //Enemigo Turno
@@ -139,12 +160,21 @@ public class Director : MonoBehaviour
         EnemigoTurno();
     }
 
+    IEnumerator ReiniciarTurno()
+    {
+        yield return new WaitForSeconds(1f);
+        Turno();
+    }
+
     public void enemigoAtaque()
     {
-        cambiarTexto("El Enemigo Ataca");
-        grupoEnemigos[0].GetComponent<IA>().EjecutarIA();
-        // grupoJugadores[0].GetComponent<Personaje>().modificarVida(-22);
+        cambiarTexto("El Enemigo Ataca "+grupoEnemigos[turno].gameObject.name);
+        VibrarCamara.Instance.MoverCamara(5,5,0.5f);
+        grupoEnemigos[turno].GetComponent<IA>().EjecutarIA();
         cambiarTexto("Recibes "+22+" de daño");
+        grupoJugadores[0].GetComponent<Personaje>().modificarVida(-23);
+        StopCoroutine(InciarTurnoEnemigo());
+        turno++;
         Turno();
     }
 
@@ -154,9 +184,91 @@ public class Director : MonoBehaviour
         enemigoAtaque();
     }
 
-    void cambiarTexto(string text)
+    public void cambiarTexto(string text)
     {
         UICombate.Instance.cambiarTextoDescripcion(text);
+    }
+
+    public void seleccionarEnemigo(string name)
+    {
+       int index = Array.FindIndex(grupoEnemigos, enemigo => enemigo.name == name);
+       enemigoSeleccionado = index;
+       anim.Play(accionEnCola.animacion);
+    }
+
+    public void setaccionEnCola(Acciones habilidad)
+    {
+        accionEnCola = habilidad;
+    }
+
+    public void ejecutarAccion()
+    {
+        int dao = grupoJugadores[0].GetComponent<Personaje>().basedao + accionEnCola.poder;
+        cambiarTexto("El Enemigo Recibe "+dao+" de daño");
+        grupoEnemigos[enemigoSeleccionado].GetComponent<Personaje>().modificarVida(-dao);
+        grupoJugadores[0].GetComponent<Personaje>().modificarEnergia(-accionEnCola.costo);
+        Turno();
+    }
+
+    public bool obtenerTamano(Transform[] array)
+    {
+        if(array.Length <= 0)
+        {
+            return false;
+        }
+
+        return true;
+    }
+
+    public void limpiarArrayEnemigos(int index)
+    {
+
+        grupoEnemigos[index]=null;
+        List<Transform> lista = new List<Transform>();
+        foreach (Transform t in grupoEnemigos)
+        {
+          lista.Add(t);
+        }
+
+        lista.RemoveAll(s => s == null);
+        grupoEnemigos = lista.ToArray();
+        if(grupoEnemigos.Length > 0)
+        {
+            for(int i=0;i<grupoEnemigos.Length;i++)
+            {
+                grupoEnemigos[i].GetComponent<Personaje>().index = i;
+            }
+        }
+        else
+        {
+            batalla = estadoBatalla.GANAR;
+        }
+    }
+
+    public void limpiarArrayJugador(int index)
+    {
+
+        grupoJugadores[index]=null;
+        List<Transform> lista = new List<Transform>();
+        foreach (Transform t in grupoJugadores)
+        {
+          lista.Add(t);
+        }
+
+        lista.RemoveAll(s => s == null);
+        grupoJugadores = lista.ToArray();
+
+        if(grupoEnemigos.Length > 0)
+        {
+            for(int i=0;i<grupoJugadores.Length;i++)
+            {
+                grupoJugadores[i].GetComponent<Personaje>().index = i;
+            }
+        }
+        else
+        {
+            batalla = estadoBatalla.PERDER;
+        }
     }
 
 }

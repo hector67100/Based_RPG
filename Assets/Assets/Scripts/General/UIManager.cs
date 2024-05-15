@@ -8,14 +8,11 @@ using TMPro;
 public class UIManager : MonoBehaviour
 {
     public static UIManager Instance;
-    [Header("Pantalla Habilidades")]
-    [SerializeField] GameObject pantallaHabilidades;
+    [Header("Pantalla Acciones")]
+    [SerializeField] GameObject pantallaAcciones;
     [SerializeField] GameObject botonHabilidad;
-
-
-    // [SerializeField] TextMeshProUGUI PuntajeMasAlto;
-    // [SerializeField] TextMeshProUGUI PuntajeMasActual;
-    // [SerializeField] TextMeshProUGUI Calificacion;
+    [SerializeField] Slider vidaSlider;
+    [SerializeField] Slider energiaSlider;
 
     void Awake()
     {
@@ -25,16 +22,34 @@ public class UIManager : MonoBehaviour
         }
     }
 
-    public void ponerBontonesHabilidades(Arma arma)
+    public void ponerBontonesAcciones(Arma arma)
     {
-        for(int i=0; i<arma.habilidades.Length; i++)
-        { Debug.Log(i);
+        for(int i=0; i<arma.acciones.Length; i++)
+        {
             GameObject boton = Instantiate(  botonHabilidad ) ;
             int index = i;
             boton.GetComponent<Button>().onClick.AddListener(() => arma.usarHabilidad(index));
-            boton.GetComponentInChildren<TextMeshProUGUI>().text=arma.habilidades[i].nombre;
-            boton.transform.SetParent(pantallaHabilidades.transform);
+            boton.GetComponentInChildren<TextMeshProUGUI>().text=arma.acciones[i].nombre;
+            boton.transform.SetParent(pantallaAcciones.transform);
         }
     }
+    
+    public void setSlidersMaxValues(float vida, float stamina)
+    {
+        vidaSlider.maxValue = vida;
+        energiaSlider.maxValue = stamina;
+    }
 
+    public void setSlidersValues(float vida = 0, float stamina = 0)
+    {
+        if(vida != 0)
+        {
+            vidaSlider.value = vida;
+        }
+
+        if(stamina != 0)
+        {
+            energiaSlider.value = stamina;
+        }
+    }
 }

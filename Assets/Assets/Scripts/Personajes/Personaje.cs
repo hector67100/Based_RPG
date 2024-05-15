@@ -6,8 +6,11 @@ public class Personaje : MonoBehaviour
 {
     public int vida;
     public int vidamaxima;
+    public float energia;
+    public float energiamaxima;
     public int nivel;
     public int basedao;
+    public int index;
     public Arma arma;
     public Habilidades[] habilidades = {
         new Habilidades{
@@ -80,9 +83,9 @@ public class Personaje : MonoBehaviour
 
     void Awake()
     {
-        if(arma)
+        if(arma && (gameObject.tag == "Player"))
         {
-            UIManager.Instance.ponerBontonesHabilidades(arma);            
+            UIManager.Instance.ponerBontonesAcciones(arma);            
         }
 
     }
@@ -90,6 +93,34 @@ public class Personaje : MonoBehaviour
     public void modificarVida(int cantidad)
     {
         vida += cantidad;
+        if(gameObject.tag == "Player")
+        {
+            UIManager.Instance.setSlidersValues(vida);
+        }
+
+        if(vida < 0)
+        {
+            Destroy(gameObject);
+
+            if(gameObject.tag == "Player")
+            {
+                // Director.Instance.limpiarArray(Director.Instance.grupoJugadores,0);
+            } 
+            else
+            {
+                 Director.Instance.limpiarArrayEnemigos(index);
+            }
+        }
+        
+    }
+
+    public void modificarEnergia(float cantidad)
+    {
+        energia += cantidad;
+        if(gameObject.tag == "Player")
+        {
+            UIManager.Instance.setSlidersValues(0,energia);
+        }
         
     }
 

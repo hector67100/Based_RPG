@@ -7,13 +7,22 @@ public class Arma : MonoBehaviour
     public int dao;
     public int nombre;
     public Sprite icono;
-    public Habilidades[] habilidades= new Habilidades[3];
+    public Acciones[] acciones= new Acciones[3];
+    public Acciones basico= new Acciones{
+    nombre = "basico",
+    poder = 0,
+    costo = 10,
+    descripcion = "basico",
+    minNivel = 0,
+    animacion = "",
+    };
 
     public void usarHabilidad(int habilidad)
     {
-        Debug.Log(habilidad);
-        int daoTotal = dao+habilidades[habilidad].poder;
-        Director.Instance.jugadorAtaque(daoTotal);
+        int daoTotal = dao+acciones[habilidad].poder;
+        UICombate.Instance.setUiJugadorTurno();
+        Director.Instance.cambiarTexto("Seleccione Enemigo");
+        Director.Instance.setaccionEnCola(acciones[habilidad]);
     }
 
 }

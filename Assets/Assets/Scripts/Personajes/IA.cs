@@ -9,7 +9,6 @@ public class IA : MonoBehaviour
 
     public void EjecutarIA()
     {   
-        Debug.Log("ay");
         switch(ia)
         {
             case "Tanque":

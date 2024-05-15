@@ -74,7 +74,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.9528302, g: 0, b: 0, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -95,6 +95,8 @@ GameObject:
   - component: {fileID: 8107276469951908718}
   - component: {fileID: 8107276469951908719}
   - component: {fileID: -3256025575154819789}
+  - component: {fileID: 3182223165779323985}
+  - component: {fileID: -9017965199885628767}
   m_Layer: 0
   m_Name: Enemigo
   m_TagString: Untagged
@@ -130,10 +132,46 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3927fb6bf2b3196469494dafc376383a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  vida: 10
+  vida: 1
   vidamaxima: 10
+  energia: 0
+  energiamaxima: 0
   nivel: 3
   basedao: 5
+  arma: {fileID: 0}
+  habilidades:
+  - nombre: Sigilo
+    rango: 0
+  - nombre: Supervivencia
+    rango: 0
+  - nombre: Investigacion
+    rango: 0
+  - nombre: Atletismo
+    rango: 0
+  - nombre: Acrobacia
+    rango: 0
+  - nombre: "Enga\xF1ar"
+    rango: 0
+  - nombre: Comerciar
+    rango: 0
+  - nombre: Diplomacia
+    rango: 0
+  - nombre: Escuchar
+    rango: 0
+  - nombre: Avistar
+    rango: 0
+  - nombre: Distancia
+    rango: 0
+  - nombre: Una Mano
+    rango: 0
+  - nombre: Dos Manos
+    rango: 0
+  - nombre: Armas de asta
+    rango: 0
+  - nombre: Mano a mano
+    rango: 0
+  - nombre: Exotica
+    rango: 0
 --- !u!114 &-3256025575154819789
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -147,3 +185,41 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ia: Tanque
+--- !u!114 &3182223165779323985
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8107276469951908704}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f502e6524da2ddb43833bef056f4e278, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!61 &-9017965199885628767
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8107276469951908704}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0.029436588, y: 0.024530768}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 2.550335, y: 4.0319843}
+  m_EdgeRadius: 0

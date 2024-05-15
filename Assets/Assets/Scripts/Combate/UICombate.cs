@@ -8,6 +8,7 @@ public class UICombate : MonoBehaviour
 {
     public static UICombate Instance;
     [SerializeField] GameObject pantallaAcciones;
+    [SerializeField] GameObject uiJugadorTurno;
     [SerializeField] TextMeshProUGUI textoDescriptcion;
     [SerializeField] Slider vidaSlider;
     [SerializeField] Slider energiaSlider;
@@ -23,5 +24,10 @@ public class UICombate : MonoBehaviour
     public void cambiarTextoDescripcion(string texto)
     {
         textoDescriptcion.text= texto;
+    }
+
+    public void setUiJugadorTurno(bool mostrar = false)
+    {   
+        uiJugadorTurno.SetActive(mostrar);
     }
 }
