@@ -698,7 +698,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &409554131
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1889,6 +1889,7 @@ MonoBehaviour:
     costo: 0
     descripcion: 
     minNivel: 0
+    golpes: 0
     animacion: 
   anim: {fileID: 1325564946}
   seleccionable: 0
@@ -1925,6 +1926,8 @@ MonoBehaviour:
   botonHabilidad: {fileID: 655535982152976770, guid: d3e4aa4b6a4f5d14381bdc22415f56bc, type: 3}
   vidaSlider: {fileID: 835327838}
   energiaSlider: {fileID: 263652718}
+  botonesAcciones: []
+  Atacar: {fileID: 1562784398}
 --- !u!95 &1325564946
 Animator:
   serializedVersion: 5
@@ -2674,10 +2677,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   vida: 50
   vidamaxima: 50
-  energia: 60
+  energia: 0
   energiamaxima: 60
   nivel: 1
   basedao: 10
+  index: 0
   arma: {fileID: 1853674247}
   habilidades:
   - nombre: Sigilo
@@ -2709,7 +2713,7 @@ MonoBehaviour:
   - nombre: Armas de asta
     rango: 0
   - nombre: Mano a mano
-    rango: 0
+    rango: 3
   - nombre: Exotica
     rango: 0
 --- !u!1 &1853674246
@@ -2744,12 +2748,21 @@ MonoBehaviour:
   dao: 5
   nombre: 0
   icono: {fileID: 0}
+  categoria: 0
   acciones:
   - nombre: Hue
     poder: 12
     costo: 15
     descripcion: pinga
     minNivel: 1
+    golpes: 2
+    animacion: slash_v
+  - nombre: fUCKYOU
+    poder: 23
+    costo: 8
+    descripcion: pinga
+    minNivel: 1
+    golpes: 1
     animacion: slash_v
   basico:
     nombre: basico
@@ -2757,6 +2770,7 @@ MonoBehaviour:
     costo: 10
     descripcion: basico
     minNivel: 0
+    golpes: 1
     animacion: slash_h
 --- !u!4 &1853674248
 Transform:

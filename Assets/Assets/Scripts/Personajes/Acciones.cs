@@ -11,5 +11,6 @@ public class Acciones
     public float costo;
     public string descripcion;
     public int minNivel;
+    public int golpes;
     public string animacion;
 }

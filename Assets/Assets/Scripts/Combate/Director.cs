@@ -47,6 +47,7 @@ public class Director : MonoBehaviour
                 {
                     UICombate.Instance.setUiJugadorTurno(true);
                     Jugador = grupoJugadores[turno];
+                    UIManager.Instance.checkStaminaBotones(Jugador.GetComponent<Personaje>().energia, Jugador.GetComponent<Personaje>().arma);
                     JugadorTurno();
                     turno++;
                 }else
@@ -204,9 +205,15 @@ public class Director : MonoBehaviour
     public void ejecutarAccion()
     {
         int dao = grupoJugadores[0].GetComponent<Personaje>().basedao + accionEnCola.poder;
-        cambiarTexto("El Enemigo Recibe "+dao+" de daño");
+        int daohecho = 0;
+        for(int i=0;i<accionEnCola.golpes;i++)
+        {
+            grupoEnemigos[enemigoSeleccionado].GetComponent<Personaje>().modificarVida(-dao);
+            daohecho += dao;
+        }
         grupoEnemigos[enemigoSeleccionado].GetComponent<Personaje>().modificarVida(-dao);
         grupoJugadores[0].GetComponent<Personaje>().modificarEnergia(-accionEnCola.costo);
+        cambiarTexto("El Enemigo Recibe "+daohecho+" de daño");
         Turno();
     }
 

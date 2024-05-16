@@ -7,6 +7,7 @@ public class Arma : MonoBehaviour
     public int dao;
     public int nombre;
     public Sprite icono;
+    public int categoria;
     public Acciones[] acciones= new Acciones[3];
     public Acciones basico= new Acciones{
     nombre = "basico",

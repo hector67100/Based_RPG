@@ -132,12 +132,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3927fb6bf2b3196469494dafc376383a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  vida: 1
+  vida: 40
   vidamaxima: 10
   energia: 0
   energiamaxima: 0
   nivel: 3
   basedao: 5
+  index: 0
   arma: {fileID: 0}
   habilidades:
   - nombre: Sigilo

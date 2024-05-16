@@ -77,6 +77,19 @@ public class Personaje : MonoBehaviour
             nombre="Exotica",
             rango=0
         },
+        // new Habilidades{
+        //     nombre="Arcana",
+        //     rango=0
+        // },
+        // new Habilidades{
+        //     nombre="Divina",
+        //     rango=0
+        // },
+        // new Habilidades{
+        //     nombre="Pura",
+        //     rango=0
+        // },
+
     };
 
     // Start is called before the first frame update
@@ -85,7 +98,7 @@ public class Personaje : MonoBehaviour
     {
         if(arma && (gameObject.tag == "Player"))
         {
-            UIManager.Instance.ponerBontonesAcciones(arma);            
+            UIManager.Instance.ponerBontonesAcciones(arma, this);            
         }
 
     }
@@ -137,24 +150,5 @@ public class Personaje : MonoBehaviour
     public void modificarBasedao(int cantidad)
     {
         basedao += cantidad; 
-    }
-
-    [System.Serializable]
-    public class Habilidades
-    {
-        public string nombre;
-        public int rango;
-
-        // Start is called before the first frame update
-        public int getRango()
-        {
-            return rango;
-        }
-
-        public string getNombre()
-        {
-            return nombre;
-        }
-
     }
 }
