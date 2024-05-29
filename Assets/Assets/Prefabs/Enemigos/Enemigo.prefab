@@ -139,7 +139,13 @@ MonoBehaviour:
   nivel: 3
   basedao: 5
   index: 0
+  buffDao: 0
+  buffArmadura: 0
+  defensa: 5
+  defendiendo: 0
+  porcentajefallo: 0
   arma: {fileID: 0}
+  armadura: {fileID: 0}
   habilidades:
   - nombre: Sigilo
     rango: 0

@@ -21,6 +21,8 @@ public class Director : MonoBehaviour
     [SerializeField] int enemigoSeleccionado = 0;
     [SerializeField] Acciones accionEnCola = null;
     [SerializeField] Animator anim;
+    [SerializeField] int combo = 0;
+    [SerializeField] Transform ObjetoAnimacion;
     private float distancia;
     public bool seleccionable = false;
 
@@ -56,6 +58,7 @@ public class Director : MonoBehaviour
                     StartCoroutine(InciarTurnoEnemigo());
                     UICombate.Instance.setUiJugadorTurno();
                     turno = 0;
+                    desactivarDefendiendo(grupoEnemigos);
                 }
             break;
 
@@ -67,6 +70,7 @@ public class Director : MonoBehaviour
                 {
                     batalla = estadoBatalla.JUGADORTURNO;
                     turno = 0;
+                    desactivarDefendiendo(grupoJugadores);
                     StartCoroutine(ReiniciarTurno());
                 }
             break;
@@ -172,8 +176,8 @@ public class Director : MonoBehaviour
         cambiarTexto("El Enemigo Ataca "+grupoEnemigos[turno].gameObject.name);
         VibrarCamara.Instance.MoverCamara(5,5,0.5f);
         grupoEnemigos[turno].GetComponent<IA>().EjecutarIA();
-        cambiarTexto("Recibes "+22+" de daño");
-        grupoJugadores[0].GetComponent<Personaje>().modificarVida(-23);
+        cambiarTexto("Recibes "+8+" de daño");
+        grupoJugadores[0].GetComponent<Personaje>().modificarVida(-8);
         StopCoroutine(InciarTurnoEnemigo());
         turno++;
         Turno();
@@ -194,6 +198,7 @@ public class Director : MonoBehaviour
     {
        int index = Array.FindIndex(grupoEnemigos, enemigo => enemigo.name == name);
        enemigoSeleccionado = index;
+       ObjetoAnimacion.transform.position = grupoEnemigos[enemigoSeleccionado].transform.position;
        anim.Play(accionEnCola.animacion);
     }
 
@@ -204,17 +209,33 @@ public class Director : MonoBehaviour
 
     public void ejecutarAccion()
     {
-        int dao = grupoJugadores[0].GetComponent<Personaje>().basedao + accionEnCola.poder;
         int daohecho = 0;
+        int multiplicador = grupoJugadores[0].GetComponent<Personaje>().acertarCritico();
+        int reduccion = grupoEnemigos[enemigoSeleccionado].GetComponent<Personaje>().defendiendo ? grupoEnemigos[enemigoSeleccionado].GetComponent<Personaje>().defensa : 0;
+        int dao = ((grupoJugadores[0].GetComponent<Personaje>().basedao + accionEnCola.poder) - reduccion) <= 0 ? 0: ((grupoJugadores[0].GetComponent<Personaje>().basedao + accionEnCola.poder) * multiplicador )- reduccion ;
         for(int i=0;i<accionEnCola.golpes;i++)
         {
-            grupoEnemigos[enemigoSeleccionado].GetComponent<Personaje>().modificarVida(-dao);
+            combo++;
+            if(accionEnCola.tipo == Acciones.Tipo.ejecutar)
+            {
+                grupoEnemigos[enemigoSeleccionado].GetComponent<Personaje>().modificarVida(-1*(dao + (combo*10)/2));     
+            }
+            else
+            {
+                grupoEnemigos[enemigoSeleccionado].GetComponent<Personaje>().modificarVida(-dao);
+            }
             daohecho += dao;
         }
-        grupoEnemigos[enemigoSeleccionado].GetComponent<Personaje>().modificarVida(-dao);
         grupoJugadores[0].GetComponent<Personaje>().modificarEnergia(-accionEnCola.costo);
         cambiarTexto("El Enemigo Recibe "+daohecho+" de daño");
-        Turno();
+        if(accionEnCola.tipo == Acciones.Tipo.cadena)
+        {
+            UICombate.Instance.setUiJugadorTurno(true);
+        }
+        else
+        {
+            Turno();
+        }
     }
 
     public bool obtenerTamano(Transform[] array)
@@ -278,4 +299,35 @@ public class Director : MonoBehaviour
         }
     }
 
+    public void desactivarDefendiendo(Transform[] array)
+    {
+        foreach(Transform personaje in array)
+        {
+            if(personaje.GetComponent<Personaje>().defendiendo)
+            {
+                personaje.GetComponent<Personaje>().defendiendo = false;
+            }   
+        }
+    }
+
+    public void activarDefendiendoJugador()
+    {
+        grupoJugadores[turno].GetComponent<Personaje>().setDefendiendo();
+    }
+    public void activarDefendiendoEnemigo()
+    {
+        grupoEnemigos[turno].GetComponent<Personaje>().setDefendiendo();
+    }
+
+    public void pasar()
+    {
+        grupoJugadores[turno].GetComponent<Personaje>().modificarEnergia(10);
+        Turno();
+    }
+
+    public void pasarEnemigo()
+    {
+        grupoEnemigos[turno].GetComponent<Personaje>().modificarEnergia(10);
+        Turno();
+    }
 }

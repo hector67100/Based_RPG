@@ -8,6 +8,8 @@ public class Arma : MonoBehaviour
     public int nombre;
     public Sprite icono;
     public int categoria;
+    public int critico;
+    public int bonocritico;
     public Acciones[] acciones= new Acciones[3];
     public Acciones basico= new Acciones{
     nombre = "basico",

@@ -11,7 +11,14 @@ public class Personaje : MonoBehaviour
     public int nivel;
     public int basedao;
     public int index;
+    public int buffDao;
+    public int buffArmadura;
+    public int defensa;
+    public bool defendiendo;
+    public int porcentajefallo;
+    
     public Arma arma;
+    public Armadura armadura;
     public Habilidades[] habilidades = {
         new Habilidades{
             nombre="Sigilo",
@@ -58,19 +65,19 @@ public class Personaje : MonoBehaviour
             rango=0
         },
         new Habilidades{
-            nombre="Una Mano",
+            nombre="Unamano",
             rango=0
         },
         new Habilidades{
-            nombre="Dos Manos",
+            nombre="Dosmanos",
             rango=0
         },
         new Habilidades{
-            nombre="Armas de asta",
+            nombre="Armasdeasta",
             rango=0
         },
         new Habilidades{
-            nombre="Mano a mano",
+            nombre="Manoamano",
             rango=0
         },
         new Habilidades{
@@ -150,5 +157,20 @@ public class Personaje : MonoBehaviour
     public void modificarBasedao(int cantidad)
     {
         basedao += cantidad; 
+    }
+
+    public int acertarCritico()
+    {
+        if(Random.Range(100,0) <= arma.critico)
+        {
+            return arma.bonocritico;
+        }
+
+        return 1;
+    }
+
+    public void setDefendiendo()
+    {
+        defendiendo = true;
     }
 }
