@@ -3,25 +3,11 @@ using System.Collections.Generic;
 using UnityEngine.EventSystems;
 using UnityEngine;
 
-public class ObtenerEnemigo : MonoBehaviour, IPointerDownHandler
-
+public class ObtenerEnemigo : MonoBehaviour
 {
-    private void Start()
-    {
-        AddPhysics2DRaycaster();
-    }
 
-    public void OnPointerDown(PointerEventData eventData)
+    private void OnMouseDown()
     {
-        Director.Instance.seleccionarEnemigo(eventData.pointerCurrentRaycast.gameObject.name);
-    }
-
-    private void AddPhysics2DRaycaster()
-    {
-        Physics2DRaycaster physicsRaycaster = FindObjectOfType<Physics2DRaycaster>();
-        if (physicsRaycaster == null)
-        {
-            Camera.main.gameObject.AddComponent<Physics2DRaycaster>();
-        }
+         Director.Instance.seleccionarEnemigo(gameObject.name);
     }
 }
