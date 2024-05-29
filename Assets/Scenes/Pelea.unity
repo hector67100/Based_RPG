@@ -2169,6 +2169,8 @@ MonoBehaviour:
   anim: {fileID: 1325564946}
   combo: 0
   ObjetoAnimacion: {fileID: 1506833139}
+  scriptVictoria: Victoria
+  scriptDerrota: Derrota
   seleccionable: 0
 --- !u!114 &1325564944
 MonoBehaviour:
@@ -2500,8 +2502,8 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1325564943}
         m_TargetAssemblyTypeName: Director, Assembly-CSharp
-        m_MethodName: jugadorAtaque
-        m_Mode: 3
+        m_MethodName: pasar
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine

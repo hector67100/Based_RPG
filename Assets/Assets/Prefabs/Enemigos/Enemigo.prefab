@@ -132,7 +132,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3927fb6bf2b3196469494dafc376383a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  vida: 40
+  vida: 1
   vidamaxima: 10
   energia: 0
   energiamaxima: 0
