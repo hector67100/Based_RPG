@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
+using Naninovel;
 
 public enum estadoBatalla { INICIO, JUGADORTURNO, ENEMIGOTURNO, GANAR, PERDER}
 public class Director : MonoBehaviour
@@ -23,6 +24,8 @@ public class Director : MonoBehaviour
     [SerializeField] Animator anim;
     [SerializeField] int combo = 0;
     [SerializeField] Transform ObjetoAnimacion;
+    [SerializeField] string scriptVictoria;
+    [SerializeField] string scriptDerrota;
     private float distancia;
     public bool seleccionable = false;
 
@@ -76,10 +79,10 @@ public class Director : MonoBehaviour
             break;
 
             case  estadoBatalla.GANAR:
-                Debug.Log("ganaste");
+                IniciarNovela(scriptVictoria);
             break;
             case  estadoBatalla.PERDER:
-                Debug.Log("perdiste");
+                IniciarNovela(scriptDerrota);
             break;
         }
         
@@ -312,7 +315,8 @@ public class Director : MonoBehaviour
 
     public void activarDefendiendoJugador()
     {
-        grupoJugadores[turno].GetComponent<Personaje>().setDefendiendo();
+        Jugador.GetComponent<Personaje>().setDefendiendo();
+        Turno();
     }
     public void activarDefendiendoEnemigo()
     {
@@ -321,7 +325,7 @@ public class Director : MonoBehaviour
 
     public void pasar()
     {
-        grupoJugadores[turno].GetComponent<Personaje>().modificarEnergia(10);
+        Jugador.GetComponent<Personaje>().modificarEnergia(10);
         Turno();
     }
 
@@ -329,5 +333,24 @@ public class Director : MonoBehaviour
     {
         grupoEnemigos[turno].GetComponent<Personaje>().modificarEnergia(10);
         Turno();
+    }
+
+    private async void IniciarNovela (string script)
+    {
+        if (Engine.Initialized) 
+        {
+            ejecutarScript(script);
+        }
+        else 
+        {
+            Engine.OnInitializationFinished += () => ejecutarScript(script);
+        }
+
+    }
+
+    private async void ejecutarScript(string script)
+    {
+	var switchCommand = new CambiarANovela { ScriptName = script };
+	switchCommand.ExecuteAsync().Forget();
     }
 }
