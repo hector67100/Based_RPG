@@ -1,5 +1,5 @@
 #Inicio
 @printer Fullscreen
-hola mundo
-@cambiocombate Combate:"Pelea"
+Escoje tu camino 
+@showUI CreadorPJ
 @stop
