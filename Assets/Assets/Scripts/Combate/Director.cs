@@ -316,6 +316,7 @@ public class Director : MonoBehaviour
     public void activarDefendiendoJugador()
     {
         Jugador.GetComponent<Personaje>().setDefendiendo();
+        Turno();
     }
     public void activarDefendiendoEnemigo()
     {
