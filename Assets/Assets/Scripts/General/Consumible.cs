@@ -14,7 +14,6 @@ public class Consumible: MonoBehaviour
     public Sprite img;
     public void Usar(Personaje pj)
     {   
-        Debug.Log(pj.vida);
         if(vida)
         {
             pj.modificarVida(valores[0]);
