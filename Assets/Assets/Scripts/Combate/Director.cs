@@ -28,6 +28,7 @@ public class Director : MonoBehaviour
     [SerializeField] string scriptDerrota;
     private float distancia;
     public bool seleccionable = false;
+    [SerializeField] Consumible objeto = null;
 
     void Awake()
     {
@@ -202,7 +203,17 @@ public class Director : MonoBehaviour
        int index = Array.FindIndex(grupoEnemigos, enemigo => enemigo.name == name);
        enemigoSeleccionado = index;
        ObjetoAnimacion.transform.position = grupoEnemigos[enemigoSeleccionado].transform.position;
-       anim.Play(accionEnCola.animacion);
+       if(!objeto)
+       {
+            anim.Play(accionEnCola.animacion);
+       }
+       else
+       {
+            objeto.Usar(grupoEnemigos[enemigoSeleccionado].GetComponent<Personaje>());
+            objeto = null;
+            Turno();
+       }
+
     }
 
     public void setaccionEnCola(Acciones habilidad)
@@ -352,5 +363,11 @@ public class Director : MonoBehaviour
     {
 	var switchCommand = new CambiarANovela { ScriptName = script };
 	switchCommand.ExecuteAsync().Forget();
+    }
+
+    public void usarObjeto()
+    {
+        objeto = Jugador.GetComponent<Personaje>().cos;
+        UICombate.Instance.setUiJugadorTurno();
     }
 }

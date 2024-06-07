@@ -11,6 +11,7 @@ public class Arma : MonoBehaviour
     public int critico;
     public int bonocritico;
     public Acciones[] acciones= new Acciones[3];
+    public Sprite img;
     public Acciones basico= new Acciones{
     nombre = "basico",
     poder = 0,

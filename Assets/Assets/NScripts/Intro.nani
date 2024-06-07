@@ -1,5 +1,6 @@
 #Inicio
 @printer Fullscreen
 Escoje tu camino 
+@actualizarClase
 @showUI CreadorPJ
 @stop
