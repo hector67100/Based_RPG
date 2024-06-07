@@ -16,9 +16,9 @@ public class Personaje : MonoBehaviour
     public int defensa;
     public bool defendiendo;
     public int porcentajefallo;
-    
     public Arma arma;
     public Armadura armadura;
+    public Consumible cos;
     public Habilidades[] habilidades = {
         new Habilidades{
             nombre="Sigilo",
@@ -73,7 +73,7 @@ public class Personaje : MonoBehaviour
             rango=0
         },
         new Habilidades{
-            nombre="Armasdeasta",
+            nombre="Armadeasta",
             rango=0
         },
         new Habilidades{

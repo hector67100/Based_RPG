@@ -10,7 +10,7 @@ public class CambiarEscena : Command
 {
     // Start is called before the first frame update
     [ParameterAlias("Combate")]
-    public StringParameter escena;
+    public StringParameter escena ;
     public override async UniTask ExecuteAsync (AsyncToken asyncToken)
     {
         var inputManager = Engine.GetService<IInputManager>();

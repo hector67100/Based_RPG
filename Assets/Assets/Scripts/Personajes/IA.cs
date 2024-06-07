@@ -6,7 +6,6 @@ using UnityEngine;
 public class IA : MonoBehaviour
 {
     [SerializeField] string ia;
-
     public void EjecutarIA()
     {   
         switch(ia)
@@ -25,8 +24,6 @@ public interface IExecuteIA
 
 public class IAtype<T> where T:IExecuteIA 
 {
-    public T data;
-
     public IAtype (T value)
     {
         value.Exec();
