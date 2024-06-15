@@ -209,8 +209,8 @@ public class Director : MonoBehaviour
        }
        else
        {
-            objeto.Usar(grupoEnemigos[enemigoSeleccionado].GetComponent<Personaje>());
-            objeto = null;
+            // objeto.Usar(grupoEnemigos[enemigoSeleccionado].GetComponent<Personaje>());
+            // objeto = null;
             Turno();
        }
 
@@ -367,7 +367,7 @@ public class Director : MonoBehaviour
 
     public void usarObjeto()
     {
-        objeto = Jugador.GetComponent<Personaje>().cos;
+        // objeto = Jugador.GetComponent<Personaje>().cos;
         UICombate.Instance.setUiJugadorTurno();
     }
 }

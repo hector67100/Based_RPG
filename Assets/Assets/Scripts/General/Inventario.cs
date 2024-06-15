@@ -2,59 +2,79 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public static class Inventario 
+[System.Serializable]
+public class Inventario : MonoBehaviour
 {
-    // Start is called before the first frame update
-    private static readonly object lockObject = new object();
-    private static Dictionary<string, object> variablesDictionary = new Dictionary<string, object>();
+    public int oro;
+    public List<Lista> inv = new List<Lista>();
+    
 
-    /// <summary>
-    /// The underlying key-value storage (dictionary).
-    /// </summary>
-    /// <value>Gets the underlying variables dictionary</value>
-    public static Dictionary<string, object> VariablesDictionary => variablesDictionary;
-
-    /// <summary>
-    /// Retrieves all global variables.
-    /// </summary>
-    /// <returns>The global variables dictionary object.</returns>
-    public static Dictionary<string, object> GetAll()
+    public void addItem(List<Lista> item)
     {
-        return variablesDictionary;
-    }
-
-    /// <summary>
-    /// Gets a variable and casts it to the provided type argument.
-    /// </summary>
-    /// <typeparam name="T">The type of the variable</typeparam>
-    /// <param name="key">The variable key</param>
-    /// <returns>The casted variable value</returns>
-    public static T Get<T>(string key)
-    {
-        if (variablesDictionary == null || !variablesDictionary.ContainsKey(key))
+        foreach(Lista items in item)
         {
-            return default(T);
-        }
-
-        return (T)variablesDictionary[key];
-    }
-
-    /// <summary>
-    /// Sets the variable, the existing value gets overridden.
-    /// </summary>
-    /// <remarks>It uses a lock under the hood to ensure consistensy between threads</remarks>
-    /// <param name="key">The variable name/key</param>
-    /// <param name="value">The variable value</param>
-    public static void Set(string key, object value)
-    {
-        lock (lockObject)
-        {
-            if (variablesDictionary == null)
+            Lista objeto = inv.Find(x => x.id == items.id) ;
+            if(objeto != null)
             {
-                variablesDictionary = new Dictionary<string, object>();
+                int index = inv.FindIndex(x => x.id == objeto.id);
+                inv[index].cantidad += items.cantidad;
             }
-            variablesDictionary[key] = value;
-        }
+            else
+            {
+                inv.Add(items);
+            }
+        }    
     }
 
+    public void removeItem(List<Lista> item)
+    {
+        foreach(Lista items in item)
+        {
+            Lista objeto = inv.Find(x => x.id == items.id) ;
+            if(objeto != null)
+            {
+                int index = inv.FindIndex(x => x.id == objeto.id);
+                inv[index].cantidad -= items.cantidad;
+                if(inv[index].cantidad <= 0)
+                {
+                    inv.RemoveAt(index);
+                }
+            }
+        }    
+    }
+    public void removeItem(Lista item)
+    {
+        Lista objeto = inv.Find(x => x.id == item.id) ;
+        if(objeto != null)
+        {
+            int index = inv.FindIndex(x => x.id == objeto.id);
+            inv[index].cantidad -= items.cantidad;
+            if(inv[index].cantidad <= 0)
+            {
+                inv.RemoveAt(index);
+            }
+        }
+    }
+    public void modificarOro(int dinero)
+    {
+        oro += dinero;
+    }
 }
+
+[System.Serializable]
+    public class Lista
+    {
+        public int id;
+        public int cantidad;
+
+        public void setId( int ids)
+        {
+            id = ids;
+        }
+
+        public void setCantidad(int num)
+        {
+            cantidad = num;
+        }
+
+    }
