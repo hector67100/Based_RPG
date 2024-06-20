@@ -1954,6 +1954,7 @@ MonoBehaviour:
   listaObjetos: {fileID: 11400000, guid: c0ff4d925e5e5164d8e7d8fc539a30ef, type: 2}
   compra: []
   venta: []
+  oro: {fileID: 534941218}
 --- !u!114 &1814432870
 MonoBehaviour:
   m_ObjectHideFlags: 0

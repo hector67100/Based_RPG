@@ -11,7 +11,7 @@ public class InvUiObj : MonoBehaviour
     [SerializeField] TextMeshProUGUI precio;
     [SerializeField] Image imagen;
     [SerializeField] int id;
-
+    [SerializeField] int cantidadInicial;
     [SerializeField] int max = 99;
 
     public void modificarNum(int num)
@@ -67,5 +67,15 @@ public class InvUiObj : MonoBehaviour
     public void setCantidad(string texto)
     {
         cantidad.text = texto;
+    }
+    public void setCantidadInicial(int num)
+    {
+        cantidadInicial = num;
+    }
+
+    public bool compararCantidad()
+    {
+        bool comparacion = cantidadInicial != int.Parse(cantidad.text) ? true : false;
+        return comparacion;
     }
 }

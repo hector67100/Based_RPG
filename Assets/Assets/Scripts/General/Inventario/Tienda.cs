@@ -45,12 +45,15 @@ public class Tienda : MonoBehaviour
         foreach(Transform child in contenedorVenta.transform)
         {
             Lista objetoComprado = new Lista();
-            objetoComprado.id = child.GetComponent<InvUiObj>().getId();
-            objetoComprado.cantidad = child.GetComponent<InvUiObj>().getCantidad();
-            venta.Add(objetoComprado);
-            int costoproducto = child.GetComponent<InvUiObj>().getCantidad() * child.GetComponent<InvUiObj>().getPrecio();
-            Debug.Log(costoproducto - Mathf.Ceil(costoproducto * 0.20f));
-            Costo -= (int)(costoproducto - Mathf.Ceil(costoproducto * 0.20f));
+            if(child.GetComponent<InvUiObj>().compararCantidad())
+            {
+                objetoComprado.id = child.GetComponent<InvUiObj>().getId();
+                objetoComprado.cantidad = child.GetComponent<InvUiObj>().getCantidad();
+                venta.Add(objetoComprado);
+                int costoproducto = child.GetComponent<InvUiObj>().getCantidad() * child.GetComponent<InvUiObj>().getPrecio();
+                Debug.Log(costoproducto - Mathf.Ceil(costoproducto * 0.20f));
+                Costo -= (int)(costoproducto - Mathf.Ceil(costoproducto * 0.20f));
+            }
         }
         
         if((jugador.oro-Costo) >= 0)
@@ -80,23 +83,26 @@ public class Tienda : MonoBehaviour
         {
             GameObject nombre = Instantiate(objeto,new Vector3(position.x,position.y,position.z),Quaternion.identity);
             nombre.transform.SetParent(contenedorVenta.transform);
-            nombre.GetComponent<InvUiObj>().setNombre(listaObjetos.inventario[objetoinstanciar.id].prefab.name);
-            nombre.GetComponent<InvUiObj>().setImage(listaObjetos.inventario[objetoinstanciar.id].sprite);
-            nombre.GetComponent<InvUiObj>().setPrecio(listaObjetos.inventario[objetoinstanciar.id].precio.ToString());
-            nombre.GetComponent<InvUiObj>().setId(objetoinstanciar.id);
-            nombre.GetComponent<InvUiObj>().setMax(objetoinstanciar.cantidad);
-            nombre.GetComponent<InvUiObj>().setCantidad(objetoinstanciar.cantidad.ToString());
+            InvUiObj itemUI = nombre.GetComponent<InvUiObj>();
+            itemUI.setNombre(listaObjetos.inventario[objetoinstanciar.id].prefab.name);
+            itemUI.setImage(listaObjetos.inventario[objetoinstanciar.id].sprite);
+            itemUI.setPrecio(listaObjetos.inventario[objetoinstanciar.id].precio.ToString());
+            itemUI.setId(objetoinstanciar.id);
+            itemUI.setMax(objetoinstanciar.cantidad);
+            itemUI.setCantidad(objetoinstanciar.cantidad.ToString());
+            itemUI.setCantidadInicial(objetoinstanciar.cantidad);
         }
 
         foreach(Lista objetoinstanciar in inventario.inv)
         {
             GameObject nombre = Instantiate(objeto,new Vector3(position.x,position.y,position.z),Quaternion.identity);
             nombre.transform.SetParent(contenedor.transform);
-            nombre.GetComponent<InvUiObj>().setNombre(listaObjetos.inventario[objetoinstanciar.id].prefab.name);
-            nombre.GetComponent<InvUiObj>().setImage(listaObjetos.inventario[objetoinstanciar.id].sprite);
-            nombre.GetComponent<InvUiObj>().setPrecio(listaObjetos.inventario[objetoinstanciar.id].precio.ToString());
-            nombre.GetComponent<InvUiObj>().setId(objetoinstanciar.id);
-            nombre.GetComponent<InvUiObj>().setMax(objetoinstanciar.cantidad);
+            InvUiObj itemUI = nombre.GetComponent<InvUiObj>();
+            itemUI.setNombre(listaObjetos.inventario[objetoinstanciar.id].prefab.name);
+            itemUI.setImage(listaObjetos.inventario[objetoinstanciar.id].sprite);
+            itemUI.setPrecio(listaObjetos.inventario[objetoinstanciar.id].precio.ToString());
+            itemUI.setId(objetoinstanciar.id);
+            
         }
     }
 
