@@ -12,9 +12,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ccd5c23aacd06c946b0f8b3e5920c41b, type: 3}
   m_Name: Lista
   m_EditorClassIdentifier: 
-  oro: 0
   inventario:
-  - id: 0
-    prefab: {fileID: 4172169867324384162, guid: f18993459dc2905458601534cee60668, type: 3}
-    cantidad: 1
+  - prefab: {fileID: 4172169867324384162, guid: f18993459dc2905458601534cee60668, type: 3}
     tipo: 0
+    id: 0
+    precio: 200
+    sprite: {fileID: -1896650606, guid: 3c0482623c794f543935c86b40f65322, type: 3}
+  - prefab: {fileID: 4172169867324384162, guid: f18993459dc2905458601534cee60668, type: 3}
+    tipo: 0
+    id: 1
+    precio: 100
+    sprite: {fileID: -171932309, guid: 3c0482623c794f543935c86b40f65322, type: 3}
+  - prefab: {fileID: 4172169867324384162, guid: f18993459dc2905458601534cee60668, type: 3}
+    tipo: 0
+    id: 1
+    precio: 100
+    sprite: {fileID: -496378248, guid: 3c0482623c794f543935c86b40f65322, type: 3}
