@@ -42,12 +42,13 @@ public class UIManager : MonoBehaviour
         {
             if(arma.acciones[i].minNivel <= rangoHabilidad)
             {
-                GameObject boton = Instantiate(  botonHabilidad ) ;
+                GameObject Contboton = Instantiate(  botonHabilidad ) ;
                 int index = i;
-                boton.GetComponent<Button>().onClick.AddListener(() => arma.usarHabilidad(index));
+                Button boton = Contboton.GetComponentInChildren<Button>();
+                boton.onClick.AddListener(() => arma.usarHabilidad(index));
                 boton.GetComponentInChildren<TextMeshProUGUI>().text=arma.acciones[i].nombre;
-                boton.transform.SetParent(pantallaAcciones.transform);
-                botones.Add(boton.GetComponent<Button>());
+                Contboton.transform.SetParent(pantallaAcciones.transform);
+                botones.Add(boton);
             }
         }
         botones.Add(Atacar);
