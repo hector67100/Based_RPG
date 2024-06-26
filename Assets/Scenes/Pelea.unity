@@ -2355,6 +2355,7 @@ GameObject:
   - component: {fileID: 1325564944}
   - component: {fileID: 1325564945}
   - component: {fileID: 1325564946}
+  - component: {fileID: 1325564947}
   m_Layer: 0
   m_Name: Director
   m_TagString: Untagged
@@ -2409,6 +2410,7 @@ MonoBehaviour:
     golpes: 0
     animacion: 
     tipo: 2
+    efecto: {fileID: 0}
   anim: {fileID: 1325564946}
   combo: 0
   ObjetoAnimacion: {fileID: 1506833139}
@@ -2416,6 +2418,7 @@ MonoBehaviour:
   scriptDerrota: Derrota
   seleccionable: 0
   objeto: {fileID: 0}
+  efecto: {fileID: 1325564947}
 --- !u!114 &1325564944
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2471,6 +2474,102 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
+--- !u!82 &1325564947
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1325564941}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 0}
+  m_PlayOnAwake: 1
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!1 &1330467112
 GameObject:
   m_ObjectHideFlags: 0
@@ -2913,7 +3012,7 @@ SpriteRenderer:
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 4, y: 2}
+  m_Size: {x: 2, y: 4}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 0
@@ -3829,6 +3928,7 @@ MonoBehaviour:
     golpes: 1
     animacion: slash_v
     tipo: 0
+    efecto: {fileID: 8300000, guid: 744aac05600095f44b865c8a83523bc6, type: 3}
   - nombre: fUCKYOU
     poder: 23
     costo: 25
@@ -3837,6 +3937,7 @@ MonoBehaviour:
     golpes: 1
     animacion: slash_v
     tipo: 1
+    efecto: {fileID: 8300000, guid: cc87e20de15114d43acc27698d7b7caa, type: 3}
   img: {fileID: 0}
   basico:
     nombre: basico
@@ -3847,6 +3948,7 @@ MonoBehaviour:
     golpes: 1
     animacion: slash_h
     tipo: 2
+    efecto: {fileID: 8300000, guid: 1e5796f2ee297084e92707447bbde50e, type: 3}
 --- !u!4 &1853674248
 Transform:
   m_ObjectHideFlags: 0

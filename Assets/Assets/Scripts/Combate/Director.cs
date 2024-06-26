@@ -29,6 +29,7 @@ public class Director : MonoBehaviour
     private float distancia;
     public bool seleccionable = false;
     [SerializeField] Consumible objeto = null;
+    [SerializeField] AudioSource efecto;
 
     void Awake()
     {
@@ -219,6 +220,12 @@ public class Director : MonoBehaviour
     public void setaccionEnCola(Acciones habilidad)
     {
         accionEnCola = habilidad;
+    }
+
+    public void setClip()
+    {
+            efecto.clip = accionEnCola.efecto;
+            efecto.Play();
     }
 
     public void ejecutarAccion()

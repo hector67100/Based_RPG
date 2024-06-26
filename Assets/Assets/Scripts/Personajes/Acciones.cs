@@ -15,4 +15,5 @@ public class Acciones
     public int golpes;
     public string animacion;
     public Tipo tipo = Tipo.neutral;
+    public AudioClip efecto;
 }
