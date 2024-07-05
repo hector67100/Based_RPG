@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.EventSystems;
 using TMPro;
 
 public class UIManager : MonoBehaviour
@@ -48,6 +49,12 @@ public class UIManager : MonoBehaviour
                 boton.onClick.AddListener(() => arma.usarHabilidad(index));
                 boton.GetComponentInChildren<TextMeshProUGUI>().text=arma.acciones[i].nombre;
                 Contboton.transform.SetParent(pantallaAcciones.transform);
+                EventTrigger trigger = Contboton.GetComponentInChildren<EventTrigger>();
+                EventTrigger.Entry entry = new EventTrigger.Entry();
+                entry.eventID = EventTriggerType.PointerEnter;
+                string descripcion = arma.acciones[i].getDescription();
+                entry.callback.AddListener(eventData => cambiarTexto(descripcion));
+                trigger.triggers.Add(entry);
                 botones.Add(boton);
             }
         }
@@ -128,7 +135,14 @@ public class UIManager : MonoBehaviour
             botonesAcciones[botonesAcciones.Length-1].enabled = true; 
         }
     }
+    public void cambiarTexto(string texto)
+    {
+        Director.Instance.cambiarTexto(texto);
+    }
 }
+
+
+
 
 
 

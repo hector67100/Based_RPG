@@ -377,4 +377,9 @@ public class Director : MonoBehaviour
         // objeto = Jugador.GetComponent<Personaje>().cos;
         UICombate.Instance.setUiJugadorTurno();
     }
+
+    public void vibrarEnemigoSeleccionado()
+    {
+        grupoEnemigos[enemigoSeleccionado].GetComponent<Personaje>().vibrar();
+    }
 }
