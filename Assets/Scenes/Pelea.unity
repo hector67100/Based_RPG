@@ -2583,7 +2583,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: f9d760f9ed9af4d43926240422912e15, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 1
+  m_Volume: 0.499
   m_Pitch: 1
   Loop: 1
   Mute: 0
@@ -3143,7 +3143,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_CategoryHash: 0
   m_labelHash: 0
-  m_SpriteKey: 2.4857314e-31
+  m_SpriteKey: 1.8185403e-14
 --- !u!1 &1559197551
 GameObject:
   m_ObjectHideFlags: 0
@@ -3981,6 +3981,9 @@ MonoBehaviour:
     rango: 3
   - nombre: Exotica
     rango: 0
+  _time: 0.2
+  _distance: 0.1
+  _delayBetweenShakes: 0
 --- !u!1 &1853674246
 GameObject:
   m_ObjectHideFlags: 0
