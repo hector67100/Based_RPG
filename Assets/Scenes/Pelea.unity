@@ -697,7 +697,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Insertar texto.... y los de Tradyst succionan pitos y no por que les gusta
+  m_text: 
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -4020,19 +4020,19 @@ MonoBehaviour:
   critico: 100
   bonocritico: 2
   acciones:
-  - nombre: Hue
+  - nombre: Tajo
     poder: 12
     costo: 15
-    descripcion: pinga
+    descripcion: Golpe Vertical
     minNivel: 1
     golpes: 1
     animacion: slash_v
     tipo: 0
     efecto: {fileID: 8300000, guid: 744aac05600095f44b865c8a83523bc6, type: 3}
-  - nombre: fUCKYOU
+  - nombre: Degollar
     poder: 23
     costo: 25
-    descripcion: pinga
+    descripcion: Apunta al cuello Enemigo
     minNivel: 1
     golpes: 1
     animacion: slash_v

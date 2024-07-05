@@ -235,17 +235,21 @@ public class Director : MonoBehaviour
         int reduccion = grupoEnemigos[enemigoSeleccionado].GetComponent<Personaje>().defendiendo ? grupoEnemigos[enemigoSeleccionado].GetComponent<Personaje>().defensa : 0;
         int dao = ((grupoJugadores[0].GetComponent<Personaje>().basedao + accionEnCola.poder) - reduccion) <= 0 ? 0: ((grupoJugadores[0].GetComponent<Personaje>().basedao + accionEnCola.poder) * multiplicador )- reduccion ;
         for(int i=0;i<accionEnCola.golpes;i++)
-        {
+        {   int daoexec = 0;
             combo++;
             if(accionEnCola.tipo == Acciones.Tipo.ejecutar)
-            {
-                grupoEnemigos[enemigoSeleccionado].GetComponent<Personaje>().modificarVida(-1*(dao + (combo*10)/2));     
+            {   
+                daoexec = -1*(dao + (combo*10)/2);
+                grupoEnemigos[enemigoSeleccionado].GetComponent<Personaje>().modificarVida(daoexec);
+                combo = 0;
             }
             else
             {
                 grupoEnemigos[enemigoSeleccionado].GetComponent<Personaje>().modificarVida(-dao);
+                
             }
-            daohecho += dao;
+            
+            daohecho += daoexec != 0 ? daoexec*-1 : dao ;
         }
         grupoJugadores[0].GetComponent<Personaje>().modificarEnergia(-accionEnCola.costo);
         cambiarTexto("El Enemigo Recibe "+daohecho+" de daño");
