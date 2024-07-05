@@ -791,7 +791,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &409554131
 RectTransform:
   m_ObjectHideFlags: 0
@@ -4044,7 +4044,7 @@ MonoBehaviour:
     minNivel: 0
     golpes: 1
     animacion: slash_h
-    tipo: 2
+    tipo: 0
     efecto: {fileID: 8300000, guid: 1e5796f2ee297084e92707447bbde50e, type: 3}
 --- !u!4 &1853674248
 Transform:

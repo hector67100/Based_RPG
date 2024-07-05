@@ -1,7 +1,26 @@
 #Inicio
 @printer Fullscreen
 @hideUI CreadorPJ
-Y asi, tu aventura comienza
-sientes el frio del invierno,
-implacable y desolador
+Ya veo
+asi que tu nombre es {nombre}
+@if claseMostrar=="Guerrero"
+    asi que un guerrero
+    el acero y tu armas siempre seran confiables
+@elseif claseMostrar=="Picaro"
+    asi que un picaro
+    el engaño, el subterfugio, lo que necesites para cumplir tu objetivo
+@else
+jaja
+@endif
+@stopBgm
+@bgm Night1 fade:1
+@printer Dialogue
+lentamente, empiezas a recobrar la conciencia
+@sfx CarretaMoviendose loop:true fade:2
+el sonido de la carreta moviendose inunda tus oidos mientras el frio del invierno abraza tu cuerpo
+el viaje al pueblo fronterizo aunque tranquilo ha sido agotador, tu cuerpo ruega por un cama comoda y el calor del fuego
+a pesar de los esfuerzos de tu cliente, su carreta no es el lugar mas comodo para tomar una siesta
+por estas fechas hay pocos viajes hacia la frontera, los caminos terminan siendo peligrosos gracias al invierno y a las criaturas que quieren sobrevivir a el
+a pesar de esto el comercio no se detiene, la gente necesita comer, asi que apesar del peligro deciden viajar
+Fuiste afortunado de encontrar alguien que realizara el viaje hacia el pueblo
 @stop
