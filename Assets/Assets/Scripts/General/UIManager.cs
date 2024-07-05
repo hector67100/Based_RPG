@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.EventSystems;
 using TMPro;
 
 public class UIManager : MonoBehaviour
@@ -42,12 +43,19 @@ public class UIManager : MonoBehaviour
         {
             if(arma.acciones[i].minNivel <= rangoHabilidad)
             {
-                GameObject boton = Instantiate(  botonHabilidad ) ;
+                GameObject Contboton = Instantiate(  botonHabilidad ) ;
                 int index = i;
-                boton.GetComponent<Button>().onClick.AddListener(() => arma.usarHabilidad(index));
+                Button boton = Contboton.GetComponentInChildren<Button>();
+                boton.onClick.AddListener(() => arma.usarHabilidad(index));
                 boton.GetComponentInChildren<TextMeshProUGUI>().text=arma.acciones[i].nombre;
-                boton.transform.SetParent(pantallaAcciones.transform);
-                botones.Add(boton.GetComponent<Button>());
+                Contboton.transform.SetParent(pantallaAcciones.transform);
+                EventTrigger trigger = Contboton.GetComponentInChildren<EventTrigger>();
+                EventTrigger.Entry entry = new EventTrigger.Entry();
+                entry.eventID = EventTriggerType.PointerEnter;
+                string descripcion = arma.acciones[i].getDescription();
+                entry.callback.AddListener(eventData => cambiarTexto(descripcion));
+                trigger.triggers.Add(entry);
+                botones.Add(boton);
             }
         }
         botones.Add(Atacar);
@@ -127,7 +135,14 @@ public class UIManager : MonoBehaviour
             botonesAcciones[botonesAcciones.Length-1].enabled = true; 
         }
     }
+    public void cambiarTexto(string texto)
+    {
+        Director.Instance.cambiarTexto(texto);
+    }
 }
+
+
+
 
 
 

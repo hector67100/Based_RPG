@@ -29,6 +29,7 @@ public class Director : MonoBehaviour
     private float distancia;
     public bool seleccionable = false;
     [SerializeField] Consumible objeto = null;
+    [SerializeField] AudioSource efecto;
 
     void Awake()
     {
@@ -221,6 +222,12 @@ public class Director : MonoBehaviour
         accionEnCola = habilidad;
     }
 
+    public void setClip()
+    {
+            efecto.clip = accionEnCola.efecto;
+            efecto.Play();
+    }
+
     public void ejecutarAccion()
     {
         int daohecho = 0;
@@ -369,5 +376,10 @@ public class Director : MonoBehaviour
     {
         // objeto = Jugador.GetComponent<Personaje>().cos;
         UICombate.Instance.setUiJugadorTurno();
+    }
+
+    public void vibrarEnemigoSeleccionado()
+    {
+        grupoEnemigos[enemigoSeleccionado].GetComponent<Personaje>().vibrar();
     }
 }

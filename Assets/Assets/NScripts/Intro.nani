@@ -1,6 +1,12 @@
 #Inicio
-@printer Fullscreen
-Escoje tu camino 
+@bgm TheLight fade:2
+@printer Dialogue
+Recientemente la paz del pueblo fronterizo se vio perturbada por sucesos extraños,
+Fuiste enviado a investigar una aparicion criatura extraña en los alrededores del pueblo, tanto el gremio como los habitantes tienen varias teorias pero solo una cosa es clara
+Esto solo puede significar problemas
+Tu trabajo es investigar que es lo que esta sucediendo en el pueblo
+Asi que dime...
+Quien eres?
 @actualizarClase
 @showUI CreadorPJ
 @stop

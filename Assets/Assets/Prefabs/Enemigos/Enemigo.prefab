@@ -72,7 +72,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
   m_Color: {r: 0.9528302, g: 0, b: 0, a: 1}
   m_FlipX: 0
@@ -132,8 +132,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3927fb6bf2b3196469494dafc376383a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  vida: 1
-  vidamaxima: 10
+  vida: 25
+  vidamaxima: 25
   energia: 0
   energiamaxima: 0
   nivel: 3
@@ -179,6 +179,9 @@ MonoBehaviour:
     rango: 0
   - nombre: Exotica
     rango: 0
+  _time: 0.2
+  _distance: 0.1
+  _delayBetweenShakes: 0
 --- !u!114 &-3256025575154819789
 MonoBehaviour:
   m_ObjectHideFlags: 0
