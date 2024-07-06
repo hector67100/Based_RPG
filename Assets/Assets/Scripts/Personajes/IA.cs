@@ -13,6 +13,10 @@ public class IA : MonoBehaviour
             case "Tanque":
             IAtype<IATanque> PUTA = new IAtype<IATanque>(new IATanque());
             break;
+
+            case "Goblin":
+            IAtype<Goblin> ass = new IAtype<Goblin>(new Goblin());
+            break;
         }
     }
 }

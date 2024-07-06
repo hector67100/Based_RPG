@@ -178,10 +178,7 @@ public class Director : MonoBehaviour
 
     public void enemigoAtaque()
     {
-        cambiarTexto("El Enemigo Ataca "+grupoEnemigos[turno].gameObject.name);
         grupoEnemigos[turno].GetComponent<IA>().EjecutarIA();
-        cambiarTexto("Recibes "+8+" de daño");
-        grupoJugadores[0].GetComponent<Personaje>().modificarVida(-8);
         StopCoroutine(InciarTurnoEnemigo());
         turno++;
         Turno();

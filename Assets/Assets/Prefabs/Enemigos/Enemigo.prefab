@@ -194,7 +194,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e2d2077aba622ef4cab02fb17eabe908, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ia: Tanque
+  ia: Goblin
 --- !u!114 &3182223165779323985
 MonoBehaviour:
   m_ObjectHideFlags: 0
