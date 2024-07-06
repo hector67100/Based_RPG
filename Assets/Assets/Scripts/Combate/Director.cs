@@ -179,7 +179,6 @@ public class Director : MonoBehaviour
     public void enemigoAtaque()
     {
         cambiarTexto("El Enemigo Ataca "+grupoEnemigos[turno].gameObject.name);
-        VibrarCamara.Instance.MoverCamara(5,5,0.5f);
         grupoEnemigos[turno].GetComponent<IA>().EjecutarIA();
         cambiarTexto("Recibes "+8+" de daño");
         grupoJugadores[0].GetComponent<Personaje>().modificarVida(-8);
@@ -206,7 +205,11 @@ public class Director : MonoBehaviour
        ObjetoAnimacion.transform.position = grupoEnemigos[enemigoSeleccionado].transform.position;
        if(!objeto)
        {
-            anim.Play(accionEnCola.animacion);
+            if(accionEnCola != null )
+            {
+                anim.Play(accionEnCola.animacion);
+            }
+            
        }
        else
        {
@@ -261,8 +264,46 @@ public class Director : MonoBehaviour
         {
             Turno();
         }
+        accionEnCola = null;
     }
 
+    //acciones del enemigo
+    public void ejecutarAccion(Acciones accion)
+    {
+        int daohecho = 0;
+        int multiplicador = grupoEnemigos[turno].GetComponent<Personaje>().acertarCritico();
+        int reduccion = grupoJugadores[0].GetComponent<Personaje>().defendiendo ? grupoJugadores[0].GetComponent<Personaje>().defensa : 0;
+        int dao = ((grupoEnemigos[turno].GetComponent<Personaje>().basedao + accionEnCola.poder) - reduccion) <= 0 ? 0: ((grupoEnemigos[turno].GetComponent<Personaje>().basedao + accionEnCola.poder) * multiplicador )- reduccion ;
+        for(int i=0;i<accionEnCola.golpes;i++)
+        {   int daoexec = 0;
+            VibrarCamara.Instance.MoverCamara(5,5,0.5f);
+            combo++;
+            if(accionEnCola.tipo == Acciones.Tipo.ejecutar)
+            {   
+                daoexec = -1*(dao + (combo*10)/2);
+                grupoJugadores[0].GetComponent<Personaje>().modificarVida(daoexec);
+                combo = 0;
+            }
+            else
+            {
+                grupoJugadores[0].GetComponent<Personaje>().modificarVida(-dao);
+                
+            }
+            
+            daohecho += daoexec != 0 ? daoexec*-1 : dao ;
+        }
+        grupoEnemigos[turno].GetComponent<Personaje>().modificarEnergia(-accionEnCola.costo);
+        cambiarTexto("Recibes "+daohecho+" de daño");
+        if(accionEnCola.tipo == Acciones.Tipo.cadena)
+        {
+            EnemigoTurno();
+        }
+        else
+        {
+            Turno();
+        }
+        accionEnCola = null;
+    }
     public bool obtenerTamano(Transform[] array)
     {
         if(array.Length <= 0)
