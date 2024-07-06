@@ -424,4 +424,9 @@ public class Director : MonoBehaviour
     {
         grupoEnemigos[enemigoSeleccionado].GetComponent<Personaje>().vibrar();
     }
+
+    public Personaje obtenerEnemigoConTurno()
+    {
+        return grupoEnemigos[turno].GetComponent<Personaje>();
+    }
 }

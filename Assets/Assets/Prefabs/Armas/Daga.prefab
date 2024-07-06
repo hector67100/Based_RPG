@@ -1,0 +1,91 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &493140566503138019
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5683511941737435490}
+  - component: {fileID: 2483828118950099989}
+  m_Layer: 0
+  m_Name: Daga
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5683511941737435490
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 493140566503138019}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 422.86224, y: 247.55193, z: -274.08743}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2483828118950099989
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 493140566503138019}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2bf367f6503a4ae4d91b96d68f415fc8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dao: 20
+  nombre: 0
+  icono: {fileID: 0}
+  categoria: 0
+  critico: 40
+  bonocritico: 2
+  acciones:
+  - nombre: "Apu\xF1alar"
+    poder: 40
+    costo: 20
+    descripcion: "Apu\xF1alas al enemigo"
+    minNivel: 1
+    golpes: 1
+    animacion: slash_v
+    tipo: 0
+    efecto: {fileID: 8300000, guid: 124cfe7398d3771469d9494a9d1a43e6, type: 3}
+  - nombre: Doble Corte
+    poder: 15
+    costo: 15
+    descripcion: Realizas 2 ataques Rapidos Al Enemigo
+    minNivel: 1
+    golpes: 2
+    animacion: slash_v
+    tipo: 0
+    efecto: {fileID: 8300000, guid: 124cfe7398d3771469d9494a9d1a43e6, type: 3}
+  - nombre: golpe Vital
+    poder: 30
+    costo: 30
+    descripcion: apuntas a los puntos vitales del oponente
+    minNivel: 2
+    golpes: 1
+    animacion: slash_h
+    tipo: 1
+    efecto: {fileID: 8300000, guid: cc87e20de15114d43acc27698d7b7caa, type: 3}
+  img: {fileID: 0}
+  basico:
+    nombre: basico
+    poder: 5
+    costo: 5
+    descripcion: corte basico
+    minNivel: 0
+    golpes: 1
+    animacion: slash_h
+    tipo: 0
+    efecto: {fileID: 8300000, guid: 124cfe7398d3771469d9494a9d1a43e6, type: 3}

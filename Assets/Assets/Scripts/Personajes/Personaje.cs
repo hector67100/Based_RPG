@@ -190,14 +190,14 @@ public class Personaje : MonoBehaviour
         defendiendo = true;
     }
 
-    public void getPorcentajeVida()
+    public int getPorcentajeVida()
     {
-        return Mathf.Ceil((vida*100)/vidamaxima);
+        return (int)Mathf.Ceil((vida*100)/vidamaxima);
     }
 
-    public void getPorcentajeEnergia()
+    public int getPorcentajeEnergia()
     {
-        return Mathf.Ceil((energia*100)/energiamaxima);
+        return (int)Mathf.Ceil((energia*100)/energiamaxima);
     }
 
     //codigo para vibrar
