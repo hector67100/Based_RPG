@@ -160,6 +160,11 @@ public class Personaje : MonoBehaviour
         vidamaxima += cantidad; 
     }
 
+    public void modificarEnergiaMaxima(int cantidad)
+    {
+        energiamaxima += cantidad; 
+    }
+
     public void modificarNivel(int cantidad)
     {
         nivel += cantidad; 
@@ -183,6 +188,16 @@ public class Personaje : MonoBehaviour
     public void setDefendiendo()
     {
         defendiendo = true;
+    }
+
+    public void getPorcentajeVida()
+    {
+        return Mathf.Ceil((vida*100)/vidamaxima);
+    }
+
+    public void getPorcentajeEnergia()
+    {
+        return Mathf.Ceil((energia*100)/energiamaxima);
     }
 
     //codigo para vibrar
