@@ -30,6 +30,8 @@ public class Director : MonoBehaviour
     public bool seleccionable = false;
     [SerializeField] Consumible objeto = null;
     [SerializeField] AudioSource efecto;
+    private float tiempo;
+    public List<Acciones> AccionesEnemigo;
 
     void Awake()
     {
@@ -179,15 +181,13 @@ public class Director : MonoBehaviour
     public void enemigoAtaque()
     {
         grupoEnemigos[turno].GetComponent<IA>().EjecutarIA();
-        StopCoroutine(InciarTurnoEnemigo());
         turno++;
-        Turno();
     }
 
     public void EnemigoTurno()
     {
         cambiarTexto("Turno Del Enemigo");
-        enemigoAtaque();
+        grupoEnemigos[turno].GetComponent<IA>().EjecutarIA();
     }
 
     public void cambiarTexto(string text)
@@ -270,12 +270,12 @@ public class Director : MonoBehaviour
         int daohecho = 0;
         int multiplicador = grupoEnemigos[turno].GetComponent<Personaje>().acertarCritico();
         int reduccion = grupoJugadores[0].GetComponent<Personaje>().defendiendo ? grupoJugadores[0].GetComponent<Personaje>().defensa : 0;
-        int dao = ((grupoEnemigos[turno].GetComponent<Personaje>().basedao + accionEnCola.poder) - reduccion) <= 0 ? 0: ((grupoEnemigos[turno].GetComponent<Personaje>().basedao + accionEnCola.poder) * multiplicador )- reduccion ;
-        for(int i=0;i<accionEnCola.golpes;i++)
+        int dao = ((grupoEnemigos[turno].GetComponent<Personaje>().basedao + accion.poder) - reduccion) <= 0 ? 0: ((grupoEnemigos[turno].GetComponent<Personaje>().basedao + accion.poder) * multiplicador )- reduccion ;
+        for(int i=0;i<accion.golpes;i++)
         {   int daoexec = 0;
             VibrarCamara.Instance.MoverCamara(5,5,0.5f);
             combo++;
-            if(accionEnCola.tipo == Acciones.Tipo.ejecutar)
+            if(accion.tipo == Acciones.Tipo.ejecutar)
             {   
                 daoexec = -1*(dao + (combo*10)/2);
                 grupoJugadores[0].GetComponent<Personaje>().modificarVida(daoexec);
@@ -289,17 +289,9 @@ public class Director : MonoBehaviour
             
             daohecho += daoexec != 0 ? daoexec*-1 : dao ;
         }
-        grupoEnemigos[turno].GetComponent<Personaje>().modificarEnergia(-accionEnCola.costo);
+        grupoEnemigos[turno].GetComponent<Personaje>().modificarEnergia(-accion.costo);
+        AccionesEnemigo.Remove(accion);
         cambiarTexto("Recibes "+daohecho+" de daño");
-        if(accionEnCola.tipo == Acciones.Tipo.cadena)
-        {
-            EnemigoTurno();
-        }
-        else
-        {
-            Turno();
-        }
-        accionEnCola = null;
     }
     public bool obtenerTamano(Transform[] array)
     {
@@ -392,6 +384,7 @@ public class Director : MonoBehaviour
     public void pasarEnemigo()
     {
         grupoEnemigos[turno].GetComponent<Personaje>().modificarEnergia(10);
+        turno++;
         Turno();
     }
 
@@ -429,4 +422,40 @@ public class Director : MonoBehaviour
     {
         return grupoEnemigos[turno].GetComponent<Personaje>();
     }
+
+    private void ejecutarAccionesEnemigas()
+    {
+        Debug.Log("aaaaa");
+        if(Herramientas.Cronometro(out tiempo, tiempo, 1f))
+        {
+            if(AccionesEnemigo[0].tipo == Acciones.Tipo.pasar)
+            {
+                pasarEnemigo();
+                AccionesEnemigo.Remove(AccionesEnemigo[0]);
+            }
+            else if(AccionesEnemigo[0].tipo == Acciones.Tipo.pasar)
+            {
+                activarDefendiendoEnemigo();
+                AccionesEnemigo.Remove(AccionesEnemigo[0]);
+            }
+            else
+            {
+                ejecutarAccion(AccionesEnemigo[0]);
+            }
+        }
+    }
+
+    public void igualarListaAcciones(Acciones[] lista)
+    {
+        AccionesEnemigo = new List<Acciones>(lista);
+    }
+
+    void Update()
+    {
+        if(AccionesEnemigo.Count > 0)
+        {
+            ejecutarAccionesEnemigas();
+        }
+    }
+
 }

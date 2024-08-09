@@ -2,10 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Herramientas : MonoBehaviour
+public static class Herramientas
 {
     // Start is called before the first frame update
-    public int personajeConMasVida(Transform[] grupo)
+    public static int personajeConMasVida(Transform[] grupo)
     {
         int indexGrupo = 0;
         int vida = grupo[0].GetComponent<Personaje>().vida;
@@ -22,7 +22,7 @@ public class Herramientas : MonoBehaviour
     }
     
 
-    public int personajeConMenosVida(Transform[] grupo)
+    public static int personajeConMenosVida(Transform[] grupo)
     {
         int indexGrupo = 0;
         int vida = grupo[0].GetComponent<Personaje>().vida;
@@ -38,7 +38,7 @@ public class Herramientas : MonoBehaviour
         return indexGrupo;
     }
 
-    public int personajeConMasNivel(Transform[] grupo)
+    public static int personajeConMasNivel(Transform[] grupo)
     {
         int indexGrupo = 0;
         int vida = grupo[0].GetComponent<Personaje>().nivel;
@@ -55,7 +55,7 @@ public class Herramientas : MonoBehaviour
     }
     
 
-    public int personajeConMenosNivel(Transform[] grupo)
+    public static int personajeConMenosNivel(Transform[] grupo)
     {
         int indexGrupo = 0;
         int vida = grupo[0].GetComponent<Personaje>().nivel;
@@ -72,7 +72,7 @@ public class Herramientas : MonoBehaviour
     }
 
 
-        public int personajeConMasDao(Transform[] grupo)
+        public static int personajeConMasDao(Transform[] grupo)
     {
         int indexGrupo = 0;
         int vida = grupo[0].GetComponent<Personaje>().basedao;
@@ -89,7 +89,7 @@ public class Herramientas : MonoBehaviour
     }
     
 
-    public int personajeConMenosDao(Transform[] grupo)
+    public static int personajeConMenosDao(Transform[] grupo)
     {
         int indexGrupo = 0;
         int vida = grupo[0].GetComponent<Personaje>().basedao;
@@ -103,5 +103,16 @@ public class Herramientas : MonoBehaviour
         }
 
         return indexGrupo;
+    }
+
+    public static  bool Cronometro(out float temp, float tiempo, float limite)
+    {
+        temp = tiempo + Time.deltaTime;
+        if (temp >= limite)
+        {
+            temp = 0;
+            return true;
+        }
+        return false;
     }
 }

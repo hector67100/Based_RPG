@@ -23,6 +23,7 @@ public class IA : MonoBehaviour
 
 public interface IExecuteIA 
 {
+
     void Exec();
 }
 

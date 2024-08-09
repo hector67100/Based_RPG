@@ -2,15 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Goblin : IExecuteIA 
+public class Goblin : IABase, IExecuteIA 
 {
     // Start is called before the first frame update
-    private Director dic = Director.Instance;
-    private Personaje enemigo;
-    private Personaje jugador;
-    private int vidaEnemigo;
-    private int energiaEnemigo;
-    private int vidaJugador;
     public void Exec()
     {
         enemigo = dic.obtenerEnemigoConTurno();
@@ -18,5 +12,23 @@ public class Goblin : IExecuteIA
         vidaJugador = jugador.getPorcentajeVida();
         vidaEnemigo = enemigo.getPorcentajeVida();
         energiaEnemigo = enemigo.getPorcentajeEnergia();
+         
+        
+        if(vidaEnemigo <= 100 && vidaEnemigo >60)
+        {
+            if(vidaJugador <= 100 && vidaJugador > 20)
+            {
+                acciones.Add(enemigo.arma.acciones[0]);
+                acciones.Add(enemigo.arma.acciones[1]);
+                acciones.Add(pasar);
+            }
+            else
+            {
+                acciones.Add(pasar);
+            }
+        }
+
+        dic.igualarListaAcciones(acciones.ToArray());
+        acciones.Clear();
     }
 }

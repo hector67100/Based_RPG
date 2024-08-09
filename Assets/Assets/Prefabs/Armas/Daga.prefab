@@ -44,16 +44,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2bf367f6503a4ae4d91b96d68f415fc8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dao: 20
+  dao: 5
   nombre: 0
   icono: {fileID: 0}
   categoria: 0
-  critico: 40
+  critico: 25
   bonocritico: 2
   acciones:
   - nombre: "Apu\xF1alar"
-    poder: 40
-    costo: 20
+    poder: 10
+    costo: 10
     descripcion: "Apu\xF1alas al enemigo"
     minNivel: 1
     golpes: 1
@@ -62,7 +62,7 @@ MonoBehaviour:
     efecto: {fileID: 8300000, guid: 124cfe7398d3771469d9494a9d1a43e6, type: 3}
   - nombre: Doble Corte
     poder: 15
-    costo: 15
+    costo: 20
     descripcion: Realizas 2 ataques Rapidos Al Enemigo
     minNivel: 1
     golpes: 2
@@ -70,7 +70,7 @@ MonoBehaviour:
     tipo: 0
     efecto: {fileID: 8300000, guid: 124cfe7398d3771469d9494a9d1a43e6, type: 3}
   - nombre: golpe Vital
-    poder: 30
+    poder: 20
     costo: 30
     descripcion: apuntas a los puntos vitales del oponente
     minNivel: 2

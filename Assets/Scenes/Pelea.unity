@@ -3934,8 +3934,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3927fb6bf2b3196469494dafc376383a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  vida: 50
-  vidamaxima: 50
+  vida: 250
+  vidamaxima: 250
   energia: 50
   energiamaxima: 50
   nivel: 1
@@ -3943,7 +3943,7 @@ MonoBehaviour:
   index: 0
   buffDao: 0
   buffArmadura: 0
-  defensa: 0
+  defensa: 10
   defendiendo: 0
   porcentajefallo: 0
   arma: {fileID: 1853674247}

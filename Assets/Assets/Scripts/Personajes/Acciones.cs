@@ -5,7 +5,7 @@ using UnityEngine;
 [System.Serializable]
 public class Acciones
 {
-    public enum Tipo { cadena , ejecutar, neutral}
+    public enum Tipo { cadena , ejecutar, neutral, defender, pasar}
     // Start is called before the first frame update
     public string nombre;
     public int poder;
